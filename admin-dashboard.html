@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TradeLang — Bảng điều khiển quản trị: tài khoản, kho từ vựng, cấu hình và nhật ký hệ thống. Bản mô phỏng bố cục.">
+  <meta name="theme-color" content="#0b2320">
+  <title>TradeLang — Quản trị hệ thống</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="app-body role-admin">
+  <a class="skip-link" href="#main">Bỏ qua điều hướng</a>
+
+  <svg class="svg-sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10.3 21a2 2 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.3 9.4 9.4 0 0 1-3.4-.6L4 21l1.8-4.6A8.3 8.3 0 1 1 21 11.5Z"/></symbol>
+    <symbol id="i-quiz" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.4 9.2a2.8 2.8 0 0 1 5.4.9c0 1.8-2.8 2.2-2.8 3.9"/><path d="M12 17.4h.01"/></symbol>
+    <symbol id="i-clipboard" viewBox="0 0 24 24"><path d="M9 4.5V3h6v1.5"/><rect x="5" y="4.5" width="14" height="16.5" rx="2"/><path d="M8.5 11h7M8.5 15h5"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V5M4 20h16"/><path d="M8 20v-6M12 20v-9M16 20v-4"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 11a3 3 0 0 0 0-6"/><path d="M17.5 14a5 5 0 0 1 3.5 6"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h7M15 18h5"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="13" cy="18" r="2"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/><path d="m3 18 9 5 9-5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5Z"/></symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 21a6 6 0 0 0 6-6c0-4-4-5-4-9-2 2-2 4-2 5-1-1-1.5-2-1.5-3C9 10 6 11.5 6 15a6 6 0 0 0 6 6Z"/></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="m10 17-5-5 5-5M5 12h11"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M4 20h16"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7L8 5Z"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 21a7 7 0 0 1 14 0"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 5h16l-6 7v6l-4 2v-8L4 5Z"/></symbol>
+  </svg>
+
+  <div class="proto-bar">
+    <div class="proto-bar__inner">
+      <span class="proto-bar__label"><span class="proto-dot"></span> Bản mô phỏng bố cục</span>
+      <nav class="proto-bar__nav" aria-label="Chuyển vai trò bản mô phỏng">
+        <a href="index.html">Khách</a>
+        <a href="student-dashboard.html">Sinh viên</a>
+        <a href="teacher-dashboard.html">Giảng viên</a>
+        <a href="admin-dashboard.html" aria-current="page">Quản trị</a>
+      </nav>
+    </div>
+  </div>
+
+  <aside class="sidebar" id="sidebar" aria-label="Điều hướng không gian quản trị">
+    <div class="sidebar__brand">
+      <a class="brand" href="index.html" aria-label="TradeLang — Trang chủ">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v15H6.5A2.5 2.5 0 0 0 4 20.5V5.5Z" fill="currentColor" opacity=".95"/>
+            <path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v15h4.5a2.5 2.5 0 0 1 2.5 2.5V5.5Z" fill="currentColor" opacity=".55"/>
+          </svg>
+        </span>
+        TradeLang
+      </a>
+      <span class="role-chip">Quản trị</span>
+    </div>
+
+    <div class="sidebar__scroll">
+      <p class="side-label">Tổng quan</p>
+      <a class="side-link is-active" href="admin-dashboard.html" aria-current="page">
+        <svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg>
+        Bảng điều khiển
+      </a>
+
+      <p class="side-label">Quản trị</p>
+      <a class="side-link" href="#" data-soon>
+        <svg class="icon" aria-hidden="true"><use href="#i-users"/></svg>
+        Người dùng
+        <span class="side-link__badge">2</span>
+      </a>
+      <a class="side-link" href="#" data-soon>
+        <svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>
+        Kho từ vựng
+      </a>
+      <a class="side-link" href="#" data-soon>
+        <svg class="icon" aria-hidden="true"><use href="#i-settings"/></svg>
+        Cấu hình hệ thống
+      </a>
+
+      <p class="side-label">Hệ thống</p>
+      <a class="side-link" href="#" data-soon>
+        <svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg>
+        Báo cáo &amp; thống kê
+      </a>
+      <a class="side-link" href="#" data-soon>
+        <svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>
+        Nhật ký hoạt động
+      </a>
+    </div>
+
+    <div class="sidebar__foot">
+      <div class="side-user">
+        <span class="avatar avatar--sm avatar--amber">QT</span>
+        <div class="side-user__text">
+          <strong>Quản trị viên</strong>
+          <span>Toàn hệ thống</span>
+        </div>
+        <button class="side-logout" type="button" aria-label="Đăng xuất" data-soon>
+          <svg class="icon" aria-hidden="true"><use href="#i-logout"/></svg>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="sidebar-scrim" data-sidebar-scrim></div>
+
+  <div class="app-main">
+    <header class="topbar">
+      <button class="icon-btn sidebar-toggle" type="button" data-sidebar-toggle aria-label="Mở menu điều hướng" aria-expanded="false" aria-controls="sidebar">
+        <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+      </button>
+      <div class="topbar__title">
+        <p class="topbar__crumb">Không gian quản trị</p>
+        <h1>Quản trị hệ thống</h1>
+      </div>
+      <div class="search">
+        <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+        <label class="sr-only" for="admin-search">Tìm kiếm</label>
+        <input id="admin-search" type="search" placeholder="Tìm tài khoản, học liệu...">
+      </div>
+      <div class="topbar__actions">
+        <button class="icon-btn has-dot" type="button" aria-label="Thông báo" data-soon>
+          <svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg>
+        </button>
+        <a class="user-pill" href="#" data-soon>
+          <span class="avatar avatar--amber">QT</span>
+          <span class="user-pill__text">
+            <strong>Quản trị</strong>
+            <span>Admin</span>
+          </span>
+        </a>
+      </div>
+    </header>
+
+    <main class="page" id="main">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Thứ Sáu, 21/11/2026 · Hệ thống</p>
+          <h2>Chào quản trị viên, hệ thống đang ổn định.</h2>
+          <p class="lead">Theo dõi tài khoản, kho từ vựng và hoạt động của TradeLang.</p>
+        </div>
+        <div class="page-head__actions">
+          <button class="btn btn--ghost" type="button" data-soon>
+            <svg class="icon" aria-hidden="true"><use href="#i-settings"/></svg>
+            Cấu hình
+          </button>
+          <button class="btn btn--primary" type="button" data-soon>
+            <svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>
+            Thêm tài khoản
+          </button>
+        </div>
+      </div>
+
+      <section class="kpi-grid" aria-label="Chỉ số hệ thống">
+        <article class="kpi">
+          <span class="kpi__icon"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg></span>
+          <div>
+            <p class="kpi__label">Tổng người dùng</p>
+            <p class="kpi__value">248 <small>tài khoản</small></p>
+            <p class="kpi__trend">+6 trong 7 ngày</p>
+          </div>
+        </article>
+        <article class="kpi">
+          <span class="kpi__icon kpi__icon--violet"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span>
+          <div>
+            <p class="kpi__label">Giảng viên</p>
+            <p class="kpi__value">14 <small>tài khoản</small></p>
+            <p class="kpi__trend kpi__trend--warn">2 tài khoản chờ duyệt</p>
+          </div>
+        </article>
+        <article class="kpi">
+          <span class="kpi__icon kpi__icon--blue"><svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg></span>
+          <div>
+            <p class="kpi__label">Lượt học hôm nay</p>
+            <p class="kpi__value">1.204</p>
+            <p class="kpi__trend">+18% so với hôm qua</p>
+          </div>
+        </article>
+        <article class="kpi">
+          <span class="kpi__icon kpi__icon--amber"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg></span>
+          <div>
+            <p class="kpi__label">Bộ glossary</p>
+            <p class="kpi__value">36 <small>bộ</small></p>
+            <p class="kpi__trend">4 cập nhật trong tuần</p>
+          </div>
+        </article>
+      </section>
+
+      <div class="grid grid--dash">
+        <article class="card">
+          <div class="card__head">
+            <h3>Tài khoản mới</h3>
+            <button class="link-btn" type="button" data-soon>Quản lý người dùng</button>
+          </div>
+          <div class="card__body card__body--flush">
+            <div class="table-wrap">
+              <table class="table table--stack">
+                <caption class="sr-only">Tài khoản mới trong tuần</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Người dùng</th>
+                    <th scope="col">Vai trò</th>
+                    <th scope="col" class="hide-sm">Ngày tạo</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col"><span class="sr-only">Hành động</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="table-person">
+                        <span class="avatar avatar--sm">NH</span>
+                        <div><strong>Nguyễn Hoàng Nam</strong><span>nam.nh@tlus.edu.vn</span></div>
+                      </div>
+                    </td>
+                    <td>Sinh viên</td>
+                    <td class="hide-sm">21/11</td>
+                    <td><span class="badge badge--success">Hoạt động</span></td>
+                    <td><button class="link-btn" type="button" data-soon>Xem</button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-person">
+                        <span class="avatar avatar--sm avatar--violet">TL</span>
+                        <div><strong>Trần Thu Lan</strong><span>lan.tt@tlus.edu.vn</span></div>
+                      </div>
+                    </td>
+                    <td>Giảng viên</td>
+                    <td class="hide-sm">20/11</td>
+                    <td><span class="badge badge--warn">Chờ duyệt</span></td>
+                    <td><button class="link-btn" type="button" data-soon>Duyệt</button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-person">
+                        <span class="avatar avatar--sm avatar--amber">MC</span>
+                        <div><strong>Lê Minh Châu</strong><span>chau.lm@tlus.edu.vn</span></div>
+                      </div>
+                    </td>
+                    <td>Sinh viên</td>
+                    <td class="hide-sm">20/11</td>
+                    <td><span class="badge badge--success">Hoạt động</span></td>
+                    <td><button class="link-btn" type="button" data-soon>Xem</button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-person">
+                        <span class="avatar avatar--sm">VH</span>
+                        <div><strong>Vũ Đức Huy</strong><span>huy.vd@tlus.edu.vn</span></div>
+                      </div>
+                    </td>
+                    <td>Giảng viên</td>
+                    <td class="hide-sm">19/11</td>
+                    <td><span class="badge badge--danger">Bị từ chối</span></td>
+                    <td><button class="link-btn" type="button" data-soon>Xem</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <p class="card__foot mini-note" style="border-top:0;margin:0">6 tài khoản mới trong 7 ngày · 2 tài khoản đang chờ duyệt.</p>
+        </article>
+
+        <div class="stack">
+          <article class="card">
+            <div class="card__head">
+              <h3>Phân bố vai trò</h3>
+              <span class="badge badge--neutral">248 tài khoản</span>
+            </div>
+            <div class="card__body">
+              <div class="donut-wrap">
+                <div class="donut" role="img" aria-label="Biểu đồ phân bố vai trò: 82% sinh viên, 6% giảng viên, 2% quản trị, 10% chờ duyệt">
+                  <div class="donut__center">
+                    <strong>248</strong>
+                    <span>tài khoản</span>
+                  </div>
+                </div>
+                <div class="legend">
+                  <div class="legend__row"><span class="legend__dot"></span> Sinh viên <b>82%</b></div>
+                  <div class="legend__row"><span class="legend__dot legend__dot--violet"></span> Giảng viên <b>6%</b></div>
+                  <div class="legend__row"><span class="legend__dot legend__dot--amber"></span> Quản trị <b>2%</b></div>
+                  <div class="legend__row"><span class="legend__dot legend__dot--gray"></span> Chờ duyệt <b>10%</b></div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__head">
+              <h3>Cấu hình nhanh</h3>
+              <button class="link-btn" type="button" data-soon>Cấu hình</button>
+            </div>
+            <div class="card__body">
+              <div class="switch-row">
+                <div class="switch-row__text">
+                  <strong>Duyệt glossary trước khi xuất bản</strong>
+                  <span>Áp dụng cho tài khoản giảng viên</span>
+                </div>
+                <button class="switch" type="button" role="switch" aria-checked="true" aria-label="Duyệt glossary trước khi xuất bản" data-switch></button>
+              </div>
+              <div class="switch-row">
+                <div class="switch-row__text">
+                  <strong>Cho phép sinh viên tự tạo thẻ</strong>
+                  <span>Sinh viên thêm flashcard cá nhân</span>
+                </div>
+                <button class="switch" type="button" role="switch" aria-checked="true" aria-label="Cho phép sinh viên tự tạo thẻ" data-switch></button>
+              </div>
+              <div class="switch-row">
+                <div class="switch-row__text">
+                  <strong>Chế độ bảo trì</strong>
+                  <span>Tạm khóa truy cập của sinh viên</span>
+                </div>
+                <button class="switch" type="button" role="switch" aria-checked="false" aria-label="Chế độ bảo trì" data-switch></button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <article class="card">
+        <div class="card__head">
+          <h3>Nhật ký hệ thống</h3>
+          <button class="link-btn" type="button" data-soon>Xem nhật ký</button>
+        </div>
+        <div class="card__body card__body--flush">
+          <div class="table-wrap">
+            <table class="table table--stack">
+              <caption class="sr-only">Nhật ký hoạt động gần đây của hệ thống</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Thời gian</th>
+                  <th scope="col">Đối tượng</th>
+                  <th scope="col">Hành động</th>
+                  <th scope="col">Trạng thái</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>09:42 · 21/11</td>
+                  <td>GV Trần Thu Lan</td>
+                  <td>Cập nhật glossary “Logistics”</td>
+                  <td><span class="badge badge--success">Thành công</span></td>
+                </tr>
+                <tr>
+                  <td>09:15 · 21/11</td>
+                  <td>Hệ thống</td>
+                  <td>Sao lưu dữ liệu tự động</td>
+                  <td><span class="badge badge--info">Hoàn thành</span></td>
+                </tr>
+                <tr>
+                  <td>08:50 · 21/11</td>
+                  <td>Quản trị viên</td>
+                  <td>Duyệt tài khoản giảng viên</td>
+                  <td><span class="badge badge--success">Thành công</span></td>
+                </tr>
+                <tr>
+                  <td>08:12 · 21/11</td>
+                  <td>Hệ thống</td>
+                  <td>Gửi thông báo hạn nộp bài</td>
+                  <td><span class="badge badge--info">Hoàn thành</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="app-footer">
+      <span>TradeLang · Bản mô phỏng bố cục</span>
+      <span>Dữ liệu minh họa · CSE122</span>
+    </footer>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

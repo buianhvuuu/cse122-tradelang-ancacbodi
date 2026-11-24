@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TradeLang — Bảng điều khiển sinh viên: lộ trình học, flashcard từ vựng, bài tập và tiến độ. Bản mô phỏng bố cục.">
+  <meta name="theme-color" content="#0b2320">
+  <title>TradeLang — Bảng điều khiển sinh viên</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="app-body role-student">
+  <a class="skip-link" href="#main">Bỏ qua điều hướng</a>
+
+  <svg class="svg-sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10.3 21a2 2 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.3 9.4 9.4 0 0 1-3.4-.6L4 21l1.8-4.6A8.3 8.3 0 1 1 21 11.5Z"/></symbol>
+    <symbol id="i-quiz" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.4 9.2a2.8 2.8 0 0 1 5.4.9c0 1.8-2.8 2.2-2.8 3.9"/><path d="M12 17.4h.01"/></symbol>
+    <symbol id="i-clipboard" viewBox="0 0 24 24"><path d="M9 4.5V3h6v1.5"/><rect x="5" y="4.5" width="14" height="16.5" rx="2"/><path d="M8.5 11h7M8.5 15h5"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V5M4 20h16"/><path d="M8 20v-6M12 20v-9M16 20v-4"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 11a3 3 0 0 0 0-6"/><path d="M17.5 14a5 5 0 0 1 3.5 6"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h7M15 18h5"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="13" cy="18" r="2"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/><path d="m3 18 9 5 9-5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5Z"/></symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 21a6 6 0 0 0 6-6c0-4-4-5-4-9-2 2-2 4-2 5-1-1-1.5-2-1.5-3C9 10 6 11.5 6 15a6 6 0 0 0 6 6Z"/></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="m10 17-5-5 5-5M5 12h11"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M4 20h16"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7L8 5Z"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 21a7 7 0 0 1 14 0"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 5h16l-6 7v6l-4 2v-8L4 5Z"/></symbol>
+  </svg>
+
+  <div class="proto-bar">
+    <div class="proto-bar__inner">
+      <span class="proto-bar__label"><span class="proto-dot"></span> Bản mô phỏng bố cục</span>
+      <nav class="proto-bar__nav" aria-label="Chuyển vai trò bản mô phỏng">
+        <a href="index.html">Khách</a>
+        <a href="student-dashboard.html" aria-current="page">Sinh viên</a>
+        <a href="teacher-dashboard.html">Giảng viên</a>
+        <a href="admin-dashboard.html">Quản trị</a>
+      </nav>
+    </div>
+  </div>
+
+  <aside class="sidebar" id="sidebar" aria-label="Điều hướng không gian sinh viên">
+    <div class="sidebar__brand">
+      <a class="brand" href="index.html" aria-label="TradeLang — Trang chủ">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v15H6.5A2.5 2.5 0 0 0 4 20.5V5.5Z" fill="currentColor" opacity=".95"/>
+            <path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v15h4.5a2.5 2.5 0 0 1 2.5 2.5V5.5Z" fill="currentColor" opacity=".55"/>
+          </svg>
+        </span>
+        TradeLang
+      </a>
+      <span class="role-chip">Sinh viên</span>
+    </div>
+
+    <div class="sidebar__scroll">
+      <p class="side-label">Tổng quan</p>
+      <a class="side-link is-active" href="student-dashboard.html" aria-current="page">
+        <svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg>
+        Bảng điều khiển
+      </a>
+
+      <p class="side-label">Học tập</p>
+      <a class="side-link" href="#" data-soon>
+        <svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>
+        Glossary &amp; flashcard
+      </a>
+      <a class="side-link" href="#" data-soon>
+        <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>
+        Hội thoại thương mại
+      </a>
+      <a class="side-link" href="#" data-soon>
+        <svg class="icon" aria-hidden="true"><use href="#i-quiz"/></svg>
+        Trắc nghiệm từ vựng
+      </a>
+      <a class="side-link" href="#" data-soon>
+        <svg class="icon" aria-hidden="true"><use href="#i-clipboard"/></svg>
+        Bài tập
+        <span class="side-link__badge">2</span>
+      </a>
+
+      <p class="side-label">Cá nhân</p>
+      <a class="side-link" href="#" data-soon>
+        <svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg>
+        Tiến độ học tập
+      </a>
+      <a class="side-link" href="#" data-soon>
+        <svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>
+        Hồ sơ &amp; cài đặt
+      </a>
+
+      <div class="side-streak">
+        <svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg>
+        <div>
+          <strong>12 ngày liên tiếp</strong>
+          <span>Kỷ lục của bạn: 18 ngày</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar__foot">
+      <div class="side-user">
+        <span class="avatar avatar--sm">MA</span>
+        <div class="side-user__text">
+          <strong>Nguyễn Minh An</strong>
+          <span>Sinh viên K22</span>
+        </div>
+        <button class="side-logout" type="button" aria-label="Đăng xuất" data-soon>
+          <svg class="icon" aria-hidden="true"><use href="#i-logout"/></svg>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="sidebar-scrim" data-sidebar-scrim></div>
+
+  <div class="app-main">
+    <header class="topbar">
+      <button class="icon-btn sidebar-toggle" type="button" data-sidebar-toggle aria-label="Mở menu điều hướng" aria-expanded="false" aria-controls="sidebar">
+        <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+      </button>
+      <div class="topbar__title">
+        <p class="topbar__crumb">Không gian sinh viên</p>
+        <h1>Bảng điều khiển</h1>
+      </div>
+      <div class="search">
+        <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+        <label class="sr-only" for="student-search">Tìm kiếm</label>
+        <input id="student-search" type="search" placeholder="Tìm thuật ngữ, bài tập...">
+      </div>
+      <div class="topbar__actions">
+        <button class="icon-btn has-dot" type="button" aria-label="Thông báo" data-soon>
+          <svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg>
+        </button>
+        <a class="user-pill" href="#" data-soon>
+          <span class="avatar">MA</span>
+          <span class="user-pill__text">
+            <strong>Minh An</strong>
+            <span>Sinh viên</span>
+          </span>
+        </a>
+      </div>
+    </header>
+
+    <main class="page" id="main">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Thứ Sáu, 21/11/2026 · Tuần 7</p>
+          <h2>Chào Minh An, hôm nay học tiếp nhé.</h2>
+          <p class="lead">Bạn còn 2 bài tập và 8 thẻ từ vựng trong lộ trình hôm nay.</p>
+        </div>
+        <div class="page-head__actions">
+          <button class="btn btn--ghost" type="button" data-soon>
+            <svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg>
+            Xem lộ trình
+          </button>
+          <button class="btn btn--primary" type="button" data-soon>
+            <svg class="icon" aria-hidden="true"><use href="#i-play"/></svg>
+            Học tiếp
+          </button>
+        </div>
+      </div>
+
+      <section class="kpi-grid" aria-label="Chỉ số học tập">
+        <article class="kpi">
+          <span class="kpi__icon"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg></span>
+          <div>
+            <p class="kpi__label">Từ vựng đã thuộc</p>
+            <p class="kpi__value">128 <small>/ 160</small></p>
+            <p class="kpi__trend">+12 trong tuần này</p>
+          </div>
+        </article>
+        <article class="kpi">
+          <span class="kpi__icon kpi__icon--amber"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg></span>
+          <div>
+            <p class="kpi__label">Điểm trung bình</p>
+            <p class="kpi__value">8.4 <small>/ 10</small></p>
+            <p class="kpi__trend">+0.6 so với tuần trước</p>
+          </div>
+        </article>
+        <article class="kpi">
+          <span class="kpi__icon kpi__icon--violet"><svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg></span>
+          <div>
+            <p class="kpi__label">Chuỗi ngày học</p>
+            <p class="kpi__value">12 <small>ngày</small></p>
+            <p class="kpi__trend kpi__trend--muted">Kỷ lục: 18 ngày</p>
+          </div>
+        </article>
+        <article class="kpi">
+          <span class="kpi__icon kpi__icon--blue"><svg class="icon" aria-hidden="true"><use href="#i-clipboard"/></svg></span>
+          <div>
+            <p class="kpi__label">Bài tập đang chờ</p>
+            <p class="kpi__value">2 <small>bài</small></p>
+            <p class="kpi__trend kpi__trend--warn">1 bài hạn 23/11</p>
+          </div>
+        </article>
+      </section>
+
+      <div class="grid grid--dash">
+        <article class="card card--roadmap">
+          <div class="card__head">
+            <h3>Lộ trình tuần này</h3>
+            <button class="link-btn" type="button" data-soon>Xem tất cả</button>
+          </div>
+          <div class="card__body">
+            <div class="progress-list">
+              <div class="progress-item">
+                <div class="progress-item__top">
+                  <strong>Thanh toán &amp; hóa đơn</strong>
+                  <span>14 / 16 thẻ · 88%</span>
+                </div>
+                <div class="progress"><div class="progress__bar" style="width:88%"></div></div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-item__top">
+                  <strong>Đàm phán thương mại</strong>
+                  <span>9 / 14 thẻ · 64%</span>
+                </div>
+                <div class="progress"><div class="progress__bar progress__bar--amber" style="width:64%"></div></div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-item__top">
+                  <strong>Logistics &amp; vận tải</strong>
+                  <span>6 / 12 thẻ · 50%</span>
+                </div>
+                <div class="progress"><div class="progress__bar progress__bar--violet" style="width:50%"></div></div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-item__top">
+                  <strong>Khiếu nại &amp; bồi thường</strong>
+                  <span>2 / 10 thẻ · 20%</span>
+                </div>
+                <div class="progress"><div class="progress__bar progress__bar--blue" style="width:20%"></div></div>
+              </div>
+            </div>
+            <div class="week-summary">
+              <div><span>Thời gian học</span><strong>3h 20m</strong></div>
+              <div><span>Thẻ đã ôn</span><strong>42 thẻ</strong></div>
+              <div><span>Mục tiêu tuần</span><strong>5 / 7 ngày</strong></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__head">
+            <h3>Flashcard hôm nay</h3>
+            <span class="badge badge--warn">Còn 8 thẻ</span>
+          </div>
+          <div class="card__body">
+            <button class="flashcard flashcard--mini" type="button" aria-pressed="false" data-flashcard aria-label="Thẻ từ vựng quotation — nhấn để lật">
+              <span class="flashcard__inner">
+                <span class="flashcard__face">
+                  <span class="flashcard__top">
+                    <span class="topic-tag">Thanh toán</span>
+                    <span class="flashcard__lang">EN</span>
+                  </span>
+                  <span class="flashcard__term">quotation</span>
+                  <span class="flashcard__phonetic">/kwəʊˈteɪʃn/</span>
+                  <span class="flashcard__hint">
+                    <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+                    Nhấn để xem nghĩa
+                  </span>
+                </span>
+                <span class="flashcard__face flashcard__face--back">
+                  <span class="flashcard__back-label">NGHĨA</span>
+                  <span class="flashcard__meaning">báo giá</span>
+                  <span class="flashcard__example">“Could you send us a quotation for 500 units?”</span>
+                  <span class="flashcard__back-topic">Thanh toán · 8 / 16</span>
+                </span>
+              </span>
+            </button>
+            <div class="practice-meta">
+              <span class="practice-hint">
+                <svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>
+                3 phút mỗi lượt ôn
+              </span>
+              <span>8 / 16 thẻ</span>
+            </div>
+            <p class="mini-note"><strong>Đã thuộc 8 thẻ</strong> trong chủ đề Thanh toán. Hoàn thành 16 thẻ để mở bài kiểm tra chủ đề.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="grid grid--dash">
+        <article class="card">
+          <div class="card__head">
+            <h3>Bài tập sắp đến hạn</h3>
+            <button class="link-btn" type="button" data-soon>Xem tất cả</button>
+          </div>
+          <div class="card__body card__body--flush">
+            <div class="table-wrap">
+              <table class="table table--stack">
+                <caption class="sr-only">Danh sách bài tập sắp đến hạn</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Bài tập</th>
+                    <th scope="col" class="hide-sm">Chủ đề</th>
+                    <th scope="col">Hạn nộp</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col"><span class="sr-only">Hành động</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="cell-title">Điền từ · Thanh toán</div>
+                      <div class="cell-sub">12 câu · 15 phút</div>
+                    </td>
+                    <td class="hide-sm">Từ vựng</td>
+                    <td>23/11 · 23:59</td>
+                    <td><span class="badge badge--warn">Sắp hết hạn</span></td>
+                    <td><button class="link-btn" type="button" data-soon>Làm bài</button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="cell-title">Hội thoại · Đàm phán giá</div>
+                      <div class="cell-sub">Nhập vai 2 vai · 8 lượt thoại</div>
+                    </td>
+                    <td class="hide-sm">Hội thoại</td>
+                    <td>25/11 · 23:59</td>
+                    <td><span class="badge badge--success">Đang mở</span></td>
+                    <td><button class="link-btn" type="button" data-soon>Tiếp tục</button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="cell-title">Trắc nghiệm tuần 5</div>
+                      <div class="cell-sub">20 câu · 10 phút</div>
+                    </td>
+                    <td class="hide-sm">Tổng hợp</td>
+                    <td>28/11 · 23:59</td>
+                    <td><span class="badge badge--neutral">Chưa mở</span></td>
+                    <td><span aria-hidden="true">—</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__head">
+            <h3>Hoạt động gần đây</h3>
+          </div>
+          <div class="card__body">
+            <ul class="timeline">
+              <li>
+                <span class="timeline__dot"></span>
+                <div>
+                  <p>Hoàn thành bộ flashcard “Thanh toán” · 9/10 thẻ</p>
+                  <time>2 giờ trước</time>
+                </div>
+              </li>
+              <li>
+                <span class="timeline__dot timeline__dot--amber"></span>
+                <div>
+                  <p>Nộp bài “Điền từ – Thanh toán”</p>
+                  <time>Hôm qua · 21:40</time>
+                </div>
+              </li>
+              <li>
+                <span class="timeline__dot timeline__dot--violet"></span>
+                <div>
+                  <p>Đạt 8.5 điểm trắc nghiệm tuần 4</p>
+                  <time>18/11 · 20:15</time>
+                </div>
+              </li>
+              <li>
+                <span class="timeline__dot"></span>
+                <div>
+                  <p>Bắt đầu chuỗi học mới</p>
+                  <time>10/11 · 08:00</time>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <span>TradeLang · Bản mô phỏng bố cục</span>
+      <span>Dữ liệu minh họa · CSE122</span>
+    </footer>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
